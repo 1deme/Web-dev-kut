@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Contact Page</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Send Me a Message</h2>
+        <form action="#" method="post">
+            <fieldset>
+                <legend>Your Information</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required><br><br>
+
+                <label>Gender:</label>
+                <input type="radio" name="gender" value="male"> Male
+                <input type="radio" name="gender" value="female"> Female<br><br>
+
+                <label for="subscribe">Subscribe to newsletter:</label>
+                <input type="checkbox" id="subscribe" name="subscribe"><br><br>
+
+                <label for="website">Your Website:</label>
+                <input type="url" id="website" name="website" placeholder="https://example.com"><br><br>
+
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" cols="40" placeholder="Write your message..."></textarea><br><br>
+
+                <input type="submit" value="Send">
+            </fieldset>
+        </form>
+    </section>
+
+    <footer>
+        <p>Go back to the <a href="index.html">Home Page</a>.</p>
+    </footer>
+</body>
+</html>

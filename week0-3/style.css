@@ -1,0 +1,86 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 40px;
+}
+
+h1, h2 {
+    color: #2a5d84;
+    text-shadow: 2px 2px 4px #ccc;
+}
+
+p {
+    line-height: 1.6;
+    word-spacing: 4px;
+    letter-spacing: 1px;
+}
+
+header, footer {
+    text-align: center;
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #aaa;
+}
+
+nav a {
+    color: #2a5d84;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #0b3d91;
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+table, th, td {
+    border: 1px solid #aaa;
+}
+
+th {
+    background-color: #b3e5fc;
+}
+
+td, th {
+    padding: 8px;
+    text-align: center;
+}
+
+fieldset {
+    border: 2px solid #2a5d84;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f1f9ff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+textarea {
+    width: 90%;
+    padding: 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #2a5d84;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #1b3d5a;
+}
