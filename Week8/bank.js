@@ -1,3 +1,34 @@
+class Transaction{
+    constructor(type, amount){
+        this.type = type;
+        this.amount = amount;
+    }
+}
+
+class Account{
+    currentAmount = 0
+    transaction = []
+    constructor(name){
+        this.name = name
+    }
+
+    withdralw(amount){
+        if(amount > this.currentAmount){
+            console.log("there is not enough amount")
+            return;
+        }
+        this.transaction.push(new Transaction("w", amount))
+        this.currentAmount -= amount
+        console.log(this.currentAmount)
+    }
+    
+    deposite(amount){
+        this.transaction.push(new Transaction("d", amount))
+        this.currentAmount += amount
+        console.log(this.currentAmount)
+    }
+}
+
 class Bank {
     constructor() {
         this.accounts = [];
