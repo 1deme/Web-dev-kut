@@ -1,0 +1,38 @@
+
+  <h2>My List</h2>
+  <ul id="myList">
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+
+  <button onclick="addItem()">Add Item</button>
+  <button onclick="removeLastTwo()">Remove Last Two</button>
+  <button onclick="updateLastItem()">Update Last Item</button>
+
+  <script>
+    function addItem() {
+      const list = document.getElementById("myList");
+      const newItem = document.createElement("li");
+      const count = list.children.length + 1;
+      newItem.textContent = "Item " + count;
+      list.appendChild(newItem);
+    }
+
+    function removeLastTwo() {
+      const list = document.getElementById("myList");
+      if (list.children.length >= 2) {
+        list.removeChild(list.lastElementChild);
+        list.removeChild(list.lastElementChild);
+      } else {
+        alert("Not enough items to remove!");
+      }
+    }
+
+    function updateLastItem() {
+      const list = document.getElementById("myList");
+      const lastItem = list.lastElementChild;
+      if (lastItem) {
+        lastItem.textContent = lastItem.textContent + " (updated)";
+      }
+    }
+  </script>
