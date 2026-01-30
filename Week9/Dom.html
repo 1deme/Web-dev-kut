@@ -1,38 +1,144 @@
+<h2>Bank</h2>
+  <table id = "info">
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Balance</b></td>
+    </tr>
+  </table>
+  <input id="nexAccName"></input>
+  <button onclick="addAcc()" >add Acc</button> <br>
 
-  <h2>My List</h2>
-  <ul id="myList">
-    <li>Item 1</li>
-    <li>Item 2</li>
-  </ul>
-
-  <button onclick="addItem()">Add Item</button>
-  <button onclick="removeLastTwo()">Remove Last Two</button>
-  <button onclick="updateLastItem()">Update Last Item</button>
-
+  <input id="from"></input>
+  <input id="to"></input>
+  <input id="amount"></input>
+  <button onclick="transfer()">Transfer</button>
   <script>
-    function addItem() {
-      const list = document.getElementById("myList");
-      const newItem = document.createElement("li");
-      const count = list.children.length + 1;
-      newItem.textContent = "Item " + count;
-      list.appendChild(newItem);
-    }
-
-    function removeLastTwo() {
-      const list = document.getElementById("myList");
-      if (list.children.length >= 2) {
-        list.removeChild(list.lastElementChild);
-        list.removeChild(list.lastElementChild);
-      } else {
-        alert("Not enough items to remove!");
+    class Transaction{
+      constructor(type, amount){
+          this.type = type;
+          this.amount = amount;
       }
     }
 
-    function updateLastItem() {
-      const list = document.getElementById("myList");
-      const lastItem = list.lastElementChild;
-      if (lastItem) {
-        lastItem.textContent = lastItem.textContent + " (updated)";
-      }
+    class Account{
+        currentAmount = 0
+        transaction = []
+        constructor(name){
+            this.name = name
+        }
+
+        withdralw(amount){
+            if(amount > this.currentAmount){
+                console.log("there is not enough amount")
+                return;
+            }
+            this.transaction.push(new Transaction("w", amount))
+            this.currentAmount -= amount
+            console.log(this.currentAmount)
+        }
+        
+        deposite(amount){
+            this.transaction.push(new Transaction("d", amount))
+            this.currentAmount += amount
+            console.log(this.currentAmount)
+        }
     }
+
+    class Bank {
+        constructor() {
+            this.accounts = [];
+        }
+
+        addAccount(account) {
+            this.accounts.push(account);
+        }
+
+        getAccount(name) {
+            return this.accounts.find(acc => acc.name === name);
+        }
+
+        totalVolume() {
+            return this.accounts.reduce((sum, acc) => sum + acc.currentAmount, 0);
+        }
+
+        richestUser() {
+            if (this.accounts.length === 0) return null;
+            return this.accounts.reduce((max, acc) =>
+                acc.currentAmount > max.currentAmount ? acc : max
+            );
+        }
+
+        transfer(fromName, toName, amount) {
+            amount -= 0
+            const fromAcc = this.getAccount(fromName);
+            const toAcc = this.getAccount(toName);
+
+            if (!fromAcc || !toAcc) {
+                console.log("One of the accounts does not exist");
+                return;
+            }
+
+            if (fromAcc.currentAmount < amount) {
+                console.log("Insufficient funds for transfer");
+                return;
+            }
+
+            fromAcc.transaction.push(new Transaction("w", amount));
+            fromAcc.currentAmount -= amount;
+
+            toAcc.transaction.push(new Transaction("d", amount));
+            toAcc.currentAmount += amount;
+
+        }
+    }
+
+    function renderAll(){
+      bank.accounts.forEach(renderTr)
+    }
+
+    let bank = new Bank()
+    let user1 = new Account("Demetre")
+    let user2 = new Account("Giorgi")
+    user1.deposite(100)
+    user2.deposite(1000)
+    user2.withdralw(800)
+    bank.addAccount(user1)
+    bank.addAccount(user2)
+    renderAll()
+
+    function renderTr(account){
+      const table = document.getElementById("info")
+      let newTr = document.createElement("tr")
+      let newTd1 = document.createElement("td")
+      let newTd2 = document.createElement("td")
+      newTd2.setAttribute("id",account.name)
+      newTd1.textContent = account.name
+      newTd2.textContent = account.currentAmount
+      newTr.appendChild(newTd1)
+      newTr.appendChild(newTd2)
+      table.appendChild(newTr)
+    }
+
+
+    function addAcc(){
+      let name = document.getElementById("nexAccName").value
+      let newAcc = new Account(name)
+      bank.addAccount(newAcc)
+      renderTr(newAcc)
+    }
+
+    function transfer(){
+      let from = document.getElementById("from")
+      let to = document.getElementById("to")
+      let am =  document.getElementById("amount")
+      bank.transfer(from.value, to.value, am.value)
+
+      document.getElementById(from.value).innerHTML = 
+        bank.getAccount(from.value).currentAmount
+
+      document.getElementById(to.value).innerHTML = bank.getAccount(to.value).currentAmount
+    }
+
+
+
   </script>

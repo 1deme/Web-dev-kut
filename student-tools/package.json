@@ -1,0 +1,13 @@
+{
+  "name": "student-tools",
+  "version": "1.0.0",
+  "description": "Simple Node.js utilities for students",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "hello": "node index.js hello",
+    "calc": "node index.js calc",
+    "info": "node index.js info"
+  },
+  "license": "ISC"
+}
