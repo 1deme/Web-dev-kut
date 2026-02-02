@@ -1,0 +1,21 @@
+{
+    "name": "node-cli-files",
+    "version": "1.0.0",
+    "description": "A small Node.js CLI project to read, check, and copy files",
+    "main": "index.js",
+    "type": "commonjs",
+    "scripts": {
+      "read": "node index.js read",
+      "stats": "node index.js stats",
+      "copy": "node index.js copy"
+    },
+    "keywords": [
+      "node",
+      "cli",
+      "filesystem"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {}
+  }
+  
