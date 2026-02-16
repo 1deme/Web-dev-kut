@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        button { padding: 10px; margin: 5px; cursor: pointer; }
+        input { padding: 8px; margin: 5px; }
+        pre { background: #f4f4f4; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test API</h1>
+    
+    <h2>GET Users</h2>
+    <button onclick="getUsers()">Get All Users</button>
+    
+    <h2>POST User</h2>
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="email" placeholder="Email">
+    <button onclick="createUser()">Create User</button>
+    
+    <h2>Result:</h2>
+    <pre id="result"></pre>
+    
+    <script>
+        function getUsers() {
+            fetch('/users')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                });
+        }
+        
+        function createUser() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            fetch('/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                getUsers();
+            });
+        }
+    </script>
+</body>
+</html>
