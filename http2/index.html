@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Add User</h2>
+<input id="name" placeholder="Name">
+<button onclick="add()">Add</button>
+
+<h2>Users</h2>
+<ul id="list"></ul>
+
+<script>
+async function load() {
+    const res = await fetch('/users');
+    const users = await res.json();
+
+    const list = document.getElementById('list');
+    list.innerHTML = '';
+
+    users.forEach(u => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            ${u.id} - ${u.name}
+            <button onclick="removeUser(${u.id})">Delete</button>
+            <button onclick="edit(${u.id})">Edit</button>
+        `;
+        list.appendChild(li);
+    });
+}
+
+async function add() {
+    const name = document.getElementById('name').value;
+
+    await fetch('/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+    });
+
+    load();
+}
+
+async function removeUser(id) {
+    await fetch('/users/' + id, { method: 'DELETE' });
+    load();
+}
+
+async function edit(id) {
+    const newName = prompt('New name:');
+
+    await fetch('/users/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: newName })
+    });
+
+    load();
+}
+
+load();
+</script>
+
+</body>
+</html>
